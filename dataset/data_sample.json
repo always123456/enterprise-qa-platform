@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "列奥纳多·达·芬奇",
+    "english_name": "Leonardo da Vinci",
+    "field": ["绘画", "科学", "工程"],
+    "nationality": "意大利",
+    "masterpiece": ["蒙娜丽莎", "最后的晚餐"],
+    "description": "文艺复兴三杰之一，不仅是伟大的艺术家，也是发明家、解剖学家，被誉为“万能天才”。"
+  },
+  {
+    "id": 2,
+    "name": "米开朗基罗",
+    "english_name": "Michelangelo Buonarroti",
+    "field": ["雕塑", "绘画", "建筑"],
+    "nationality": "意大利",
+    "masterpiece": ["大卫像", "西斯廷教堂天顶画"],
+    "description": "文艺复兴三杰之一，以其充满力量感和人体美的雕塑与壁画闻名，代表了文艺复兴雕塑艺术的最高峰。"
+  },
+  {
+    "id": 3,
+    "name": "拉斐尔·桑西",
+    "english_name": "Raffaello Santi",
+    "field": ["绘画", "建筑"],
+    "nationality": "意大利",
+    "masterpiece": ["雅典学院", "西斯廷圣母"],
+    "description": "文艺复兴三杰中最年轻的一位，其作品以和谐、秀美、典雅的风格著称，代表了文艺复兴时期理想美的典范。"
+  },
+  {
+    "id": 4,
+    "name": "威廉·莎士比亚",
+    "english_name": "William Shakespeare",
+    "field": ["文学", "戏剧"],
+    "nationality": "英国",
+    "masterpiece": ["哈姆雷特", "罗密欧与朱丽叶"],
+    "description": "英国文艺复兴时期最杰出的剧作家和诗人，其作品深刻反映了人文主义思想，对世界文学产生了深远影响。"
+  }
+]
