@@ -1,5 +1,6 @@
 
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
 
 from agent_system.react_agent_system import ReActAgentSystem
@@ -12,7 +13,7 @@ class EnterpriseAgentSystem:
 
     def __init__(
         self,
-        model,
+        model: BaseChatModel,
         document_storage: DocumentStorage,
         parser=None,
         top_k: int = 4

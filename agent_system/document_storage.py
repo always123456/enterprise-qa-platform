@@ -12,6 +12,8 @@ from langchain_community.document_loaders import (
 )
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
+from embedding_storage.embedding_model import EmbeddingModelManagerWithHuggingFace
+from embedding_storage.faiss_manager import FAISSManager
 
 
 class DocumentStorage:
@@ -19,7 +21,7 @@ class DocumentStorage:
 
     def __init__(
         self,
-        embeddings: Embeddings,
+        embeddings: EmbeddingModelManagerWithHuggingFace = EmbeddingModelManagerWithHuggingFace(),
         index_path: str = "faiss_index",
         chunk_size: int = 800,
         chunk_overlap: int = 120
@@ -192,9 +194,10 @@ class DocumentStorage:
 
         chunks = self.split_documents(documents)
 
-        self.vector_store = FAISS.from_documents(
+        faiss_manager = FAISSManager(embedding_model_manager=EmbeddingModelManagerWithHuggingFace())
+
+        self.vector_store = faiss_manager.build_index(
             documents=chunks,
-            embedding=self.embeddings
         )
 
         return self.vector_store
@@ -214,7 +217,7 @@ class DocumentStorage:
 
         self.vector_store.save_local(str(save_path))
 
-    def load(self, path: Optional[str] = None) -> FAISS:
+    def load(self, path: str) -> FAISS:
         """从本地加载 FAISS 索引"""
 
         load_path = Path(path) if path else self.index_path
@@ -223,13 +226,14 @@ class DocumentStorage:
             raise FileNotFoundError(
                 f"FAISS 索引不存在：{load_path}"
             )
+        
+        faiss_manager_load_local = FAISSManager(
+            embedding_model_manager=EmbeddingModelManagerWithHuggingFace(),
+            index_path=path,
+        )
 
         # 只加载可信来源、由自己生成的索引文件。
-        self.vector_store = FAISS.load_local(
-            str(load_path),
-            self.embeddings,
-            allow_dangerous_deserialization=True
-        )
+        self.vector_store = faiss_manager_load_local.load_index()
 
         return self.vector_store
 
